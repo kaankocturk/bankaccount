@@ -36,14 +36,16 @@
               <th id='d'>Date</th>
               <th>Deposits</th>
               <th>Withdrawals</th>
+              <th></th>
             </tr>
           </thead>
             <tbody>
-              <tr id="template">
+              <tr id="template" data-price=''>
                 <td class='caption'>a</td>
                 <td class='date'></td>
                 <td class='deposit'></td>
                 <td class='withdrawal'></td>
+                <td class='remove'> </td>
               </tr>
             </tbody>
         </table>
@@ -51,7 +53,7 @@
       <button type="button" class="btn btn-default all">All</button>
         <button type="button" class="btn btn-success deposits">Deposits</button>
         <button type="button" class="btn btn-danger withdrawals">Withdrawals</button>
-        <span>Account Balance: </span><span id='balance'></span>
+        <span>Account Balance: $</span><span id='balance'></span>
  </div>
   </div>
       <script src='main.js'></script>

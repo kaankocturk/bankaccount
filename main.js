@@ -12,20 +12,23 @@ function handleEntry(e){
   var $tr = $('#template').clone().attr('id', 'transaction'+transactionCount);
   var caption = $('input#caption').val();
   var date = $('input#date').val();
-  var amount = $('input#amount').val();
-  balance += parseInt(amount);
+  var amount = parseFloat($('input#amount').val());
+  var glyph = $('<span>').addClass('glyphicon glyphicon-trash').attr('aria-hidden', 'true');
+  var $button = $('<button>').addClass('btn btn-default trash btn-xs').attr('aria-label', 'Left Align').append(glyph);
+  balance += amount;
   $('#balance').text(balance);
   $('tbody').prepend($tr);
   $('tr#transaction'+transactionCount+' .caption').text(caption);
   $('tr#transaction'+transactionCount+' .date').text(date);
   if(amount>0){
-    $('tr#transaction'+transactionCount+' .deposit').text(amount);
+    $('tr#transaction'+transactionCount+' .deposit').text('$' +amount.toFixed(2));
     $('tr#transaction'+transactionCount).addClass('dep');
   }
   else{
-    $('tr#transaction'+transactionCount+' .withdrawal').text(amount);
+    $('tr#transaction'+transactionCount+' .withdrawal').text('$' +amount.toFixed(2));
     $('tr#transaction'+transactionCount).addClass('wit');
   }
+  $('tr#transaction'+transactionCount+' .remove').append($button);
   $('input').val('');
 
   $('th#t').on('click', function(){ //displays transactions alphabetically
@@ -55,6 +58,22 @@ $('.all').on('click', function(){ //displays all
     $('.dep').css('visibility', 'visible');
     $('.wit').css('visibility', 'visible');
 });
+$('.remove').on('click', function(e){
+      e.stopPropagation();
+      var $row= $(e.target).closest('tr');
+      console.log($row.children('td:nth-child(3)').text());
+      if($row.hasClass('dep')){
+        var stramount = $row.children('td:nth-child(3)').text();
+        balance -= parseInt(stramount.slice(1,stramount.indexOf('.')));
+      }
+      else{
+        var stramount =$row.children('td:nth-child(4)').text();
+        balance+= parseInt(stramount.slice(2,stramount.indexOf('.')));
+      }
+      debugger;
+      $('#balance').text(balance.toFixed(2));
+      $(this).closest('tr').remove();
+  });
   // var storeAll = $('tbody tr').detach();
   // for(var i = 0; i<storeAll.length; i++)(
   //   if(storeAll[i].hasClass('dep')){
