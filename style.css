@@ -1,0 +1,19 @@
+#template{
+visibility: hidden;
+}
+.container1{
+  text-align: center;
+}
+.input{
+  margin-bottom: 30px;
+}
+.deposit{
+  color: green;
+  text-decoration-color: #0f0;
+  text-decoration: underline;
+}
+.withdrawal{
+  color: red;
+  text-decoration-color: #f00;
+  text-decoration: underline;
+}
